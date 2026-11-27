@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Compatibilidade com o Tailwind v3 do protótipo: borda padrão cinza (v4 usa currentColor). */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-gray-200, currentColor); }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+}
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body { height: 100%; margin: 0; background: #000; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #fff; }
+#frame { position: relative; width: 100%; max-width: 430px; height: 100vh; height: 100dvh; margin: 0 auto; overflow: hidden; background: #000; }
+@media (min-width: 431px) { #frame { border-left: 1px solid rgba(255,255,255,.1); border-right: 1px solid rgba(255,255,255,.1); } }
+#root { position: absolute; inset: 0; }
+#overlay-root { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+input, button, select, textarea { font-family: inherit; }
+input, select, textarea { font-size: 17px; }          /* 16px+ evita o zoom automático do iOS */
+input[type=date] { color-scheme: dark; }
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; -webkit-user-select: none; user-select: none; }
+input, textarea { -webkit-user-select: text; user-select: text; }
+button { cursor: pointer; touch-action: manipulation; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-8px); } 40%, 60% { transform: translateX(8px); } }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-12px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.anim-sheet { animation: sheetUp .28s cubic-bezier(.2,.9,.3,1); }
+.anim-fade { animation: fadeIn .2s ease-out; }
+.anim-shake { animation: shake .45s ease-in-out; }
+.anim-toast { animation: toastIn .22s ease-out; }
+.anim-spin { animation: spin .8s linear infinite; }
+.splash { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 24px; color: #8E8E93; font-size: 15px; }
+.splash b { color: #fff; font-size: 22px; }
+.splash .dot { width: 28px; height: 28px; border-radius: 50%; border: 3px solid #2C2C2E; border-top-color: #0A84FF; animation: spin .8s linear infinite; }
